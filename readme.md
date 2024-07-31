@@ -13,7 +13,7 @@ Prerequisites
 
     bash
 
-git clone https://github.com/your-username/myapp.git
+git clone https://github.com/hitesh-CodeCrafter/infilion-assignment.git
 
 Navigate to the project directory:
 
