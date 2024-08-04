@@ -26,7 +26,7 @@ func main() {
 		return
 	}
 	log.Println("Connected to database successfully")
-	
+
 	app := internal.MyApp{
 		DB: Db,
 	}

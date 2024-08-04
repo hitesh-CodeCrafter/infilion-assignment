@@ -32,15 +32,16 @@ func (app *MyApp) CreatePerson(c *gin.Context) {
 		return
 	}
 
-	err = app.CreatePersonData(data)
+	personId, err := app.CreatePersonData(data)
 	if err != nil {
 		ServerError(c, err.Error())
 		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"error":   false,
-		"message": "Person created successfully",
+		"error":     false,
+		"message":   "Person created successfully",
+		"person_id": personId,
 	})
 
 }

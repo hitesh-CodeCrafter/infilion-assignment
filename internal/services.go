@@ -25,7 +25,7 @@ func (app *MyApp) GetPersonById(id string) (data Person, err error) {
 	return data, nil
 }
 
-func (app *MyApp) CreatePersonData(data Person) error {
+func (app *MyApp) CreatePersonData(data Person) (int, error) {
 
 	var (
 		personId  int64
@@ -43,7 +43,7 @@ func (app *MyApp) CreatePersonData(data Person) error {
 	query, err := txn.Exec(personQuery, data.Name)
 	if err != nil {
 		log.Println(err)
-		return err
+		return 0, err
 	}
 	personId, _ = query.LastInsertId()
 
@@ -51,22 +51,22 @@ func (app *MyApp) CreatePersonData(data Person) error {
 
 	if err != nil {
 		log.Println(err)
-		return err
+		return 0, err
 	}
 
 	query, err = txn.Exec(addressQuery, data.City, data.State, data.Street1, data.Street2, data.ZipCode)
 	if err != nil {
 		log.Println(err)
-		return err
+		return 0, err
 	}
 	addressId, _ = query.LastInsertId()
 
 	_, err = txn.Exec(addressJoinQuery, personId, addressId)
 	if err != nil {
 		log.Println(err)
-		return err
+		return 0, err
 	}
 
 	txn.Commit()
-	return nil
+	return int(personId), nil
 }
