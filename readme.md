@@ -19,7 +19,7 @@ Navigate to the project directory:
 
 bash
 
-cd myapp
+cd infilion-assignment
 
 Install dependencies:
 
